@@ -27,6 +27,7 @@
         android:name="com.jlmari.baseandroid.dashboard.DashboardFragment"
         android:label="DashboardFragment"
         tools:layout="@layout/fr_dashboard" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.jlmari.baseandroid.login.LoginFragment"

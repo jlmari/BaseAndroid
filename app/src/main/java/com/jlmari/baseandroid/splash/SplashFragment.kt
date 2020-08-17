@@ -1,9 +1,9 @@
 package com.jlmari.baseandroid.splash
 
+import androidx.navigation.fragment.findNavController
 import com.jlmari.baseandroid.R
 import com.jlmari.baseandroid.application.di.AppComponent
 import com.jlmari.baseandroid.base.BaseFragment
-import com.jlmari.presentation.dashboard.DashboardContract
 import com.jlmari.presentation.splash.SplashContract
 
 class SplashFragment :
@@ -19,10 +19,12 @@ class SplashFragment :
     }
 
     override fun navigateToLogin() {
-        TODO("Not yet implemented")
+        val direction = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+        findNavController().navigate(direction)
     }
 
     override fun navigateToDashboard() {
-        TODO("Not yet implemented")
+        val direction = SplashFragmentDirections.actionSplashFragmentToDashboardFragment()
+        findNavController().navigate(direction)
     }
 }
