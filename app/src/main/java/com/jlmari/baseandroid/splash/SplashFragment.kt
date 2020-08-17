@@ -3,6 +3,7 @@ package com.jlmari.baseandroid.splash
 import com.jlmari.baseandroid.R
 import com.jlmari.baseandroid.application.di.AppComponent
 import com.jlmari.baseandroid.base.BaseFragment
+import com.jlmari.presentation.dashboard.DashboardContract
 import com.jlmari.presentation.splash.SplashContract
 
 class SplashFragment :
@@ -15,5 +16,13 @@ class SplashFragment :
         appComponent?.splashComponentBuilder()
             ?.build()
             ?.inject(this)
+    }
+
+    override fun navigateToLogin() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToDashboard() {
+        TODO("Not yet implemented")
     }
 }
