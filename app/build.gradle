@@ -37,6 +37,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$xAppCompatVersion"
     implementation "androidx.core:core-ktx:$xCoreKtxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$xConstraintLayoutVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$xNavigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$xNavigationVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "androidx.room:room-runtime:$xRoomVersion"

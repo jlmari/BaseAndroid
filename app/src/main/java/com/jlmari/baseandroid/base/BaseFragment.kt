@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.jlmari.baseandroid.application.di.AppComponent
@@ -36,6 +37,7 @@ abstract class BaseFragment<in V : BaseContract.View, in R : BaseContract.Router
      * Add the required initializations to inject a custom progress dialog for all fragments.
      * It will be used for loading purposes.
      */
+    override var progressDialog: DialogFragment? = ProgressDialogFragment()
     override lateinit var progressDialogFragmentManager: FragmentManager
     override var progressDialogLifecycle = lifecycle
 
