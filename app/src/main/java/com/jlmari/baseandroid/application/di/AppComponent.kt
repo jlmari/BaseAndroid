@@ -7,12 +7,11 @@ import com.jlmari.baseandroid.dashboard.di.DashboardComponent
 import com.jlmari.baseandroid.login.di.LoginComponent
 import com.jlmari.baseandroid.main.di.MainComponent
 import com.jlmari.baseandroid.splash.di.SplashComponent
-import com.jlmari.presentation.dashboard.DashboardContract
 import dagger.Component
 
 @PerApplication
 @Component(
-    modules = [AppModule::class]
+    modules = [AppModule::class, RepositoriesModule::class, DataSourcesModule::class]
 )
 interface AppComponent {
 

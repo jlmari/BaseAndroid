@@ -1,0 +1,20 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    // Modules
+    implementation project(':domain')
+    implementation project(':data')
+
+    // Own dependencies
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion") {
+        // Exclude Retrofit’s OkHttp peer-dependency module in order to define our own module import
+        exclude module: 'okhttp'
+    }
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+}
