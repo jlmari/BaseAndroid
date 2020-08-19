@@ -1,11 +1,19 @@
 package com.jlmari.domain.usecases
 
+import com.jlmari.domain.dispatchers.AppDispatchers
 import com.jlmari.domain.models.UserModel
 import com.jlmari.domain.repositories.Repository
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LogoutUseCase @Inject constructor(private val repository: Repository) {
+class LogoutUseCase @Inject constructor(
+    appDispatchers: AppDispatchers,
+    private val repository: Repository
+) {
 
-    // TODO: Add io dispatcher coroutine
-    suspend fun execute(user: UserModel) = repository.logout(user)
+    private val ioDispatcher = appDispatchers.io
+
+    suspend fun execute(user: UserModel) = withContext(ioDispatcher) {
+        repository.logout(user)
+    }
 }
