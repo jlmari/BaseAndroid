@@ -8,16 +8,11 @@ class Failure<E>(val error: E) : Response<Nothing, E>()
 /**
  * Then response of [T] is mapped using a [lambda] to return a new CoroutineResponse type [V].
  */
-inline fun <T, V, E> Response<T, E>.map(lambda: (T) -> V): Response<V, E> {
-    return when (this) {
-        is Success -> {
-            Success(lambda(this.result))
-        }
-        is Failure -> {
-            Failure(this.error)
-        }
+inline fun <T, V, E> Response<T, E>.map(lambda: (T) -> V): Response<V, E> =
+    when (this) {
+        is Success -> Success(lambda(this.result))
+        is Failure -> Failure(this.error)
     }
-}
 
 /**
  * The response of [T] is flatMapper using a [lambda] to return a new [Result] type [V].
@@ -25,12 +20,8 @@ inline fun <T, V, E> Response<T, E>.map(lambda: (T) -> V): Response<V, E> {
  */
 inline fun <T, V, E> Response<T, E>.flatMap(lambda: (T) -> Response<V, E>): Response<V, E> =
     when (this) {
-        is Success -> {
-            lambda(this.result)
-        }
-        is Failure -> {
-            this
-        }
+        is Success -> lambda(this.result)
+        is Failure -> this
     }
 
 /**
@@ -44,12 +35,8 @@ inline fun <T, V, E> Response<T, E>.either(
     onFailure: (E) -> V
 ): V =
     when (this) {
-        is Success -> {
-            onSuccess.invoke(this.result)
-        }
-        is Failure -> {
-            onFailure.invoke(this.error)
-        }
+        is Success -> onSuccess.invoke(this.result)
+        is Failure -> onFailure.invoke(this.error)
     }
 
 /**
@@ -57,12 +44,8 @@ inline fun <T, V, E> Response<T, E>.either(
  */
 fun <T, E> Response<T, E>.valueOrNull(): T? =
     when (this) {
-        is Success -> {
-            this.result
-        }
-        else -> {
-            null
-        }
+        is Success -> this.result
+        else -> null
     }
 
 /**
@@ -71,6 +54,5 @@ fun <T, E> Response<T, E>.valueOrNull(): T? =
 fun <T, E> Response<T, E>.getOrThrow(): T =
     when (this) {
         is Success -> result
-        // TODO: E should extend Throwable
         is Failure -> throw error as Throwable
     }
