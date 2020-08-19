@@ -65,11 +65,14 @@ class LoginPresenter @Inject constructor(
 
     override fun onRegisterButtonClicked() {
         scope.launch {
+            viewAction { showProgress() }
             val request = registerUseCase.execute(UserModel(inputEmail, inputPassword))
             request.either(
                 onSuccess = {
+                    viewAction { hideProgress() }
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
+                    viewAction { hideProgress() }
                     viewAction { showError(it.message ?: "Register error") }
                 }
             )

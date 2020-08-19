@@ -10,6 +10,10 @@ interface LoginContract {
 
         fun setRegisterButtonEnabled(isEnabled: Boolean)
 
+        fun showProgress()
+
+        fun hideProgress()
+
         fun showError(message: String)
     }
 

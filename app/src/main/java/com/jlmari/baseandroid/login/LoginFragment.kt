@@ -41,6 +41,14 @@ class LoginFragment :
         btnRegister.isEnabled = isEnabled
     }
 
+    override fun showProgress() {
+        showProgressDialog()
+    }
+
+    override fun hideProgress() {
+        dismissProgressDialog()
+    }
+
     override fun showError(message: String) {
         context?.let { Toast.makeText(it, message, Toast.LENGTH_LONG).show() }
     }
