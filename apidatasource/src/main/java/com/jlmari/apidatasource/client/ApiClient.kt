@@ -4,12 +4,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jlmari.apidatasource.service.ApiService
 import com.jlmari.domain.flavors.Flavor
-import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient(isDebug: Boolean, flavor: Flavor) {
