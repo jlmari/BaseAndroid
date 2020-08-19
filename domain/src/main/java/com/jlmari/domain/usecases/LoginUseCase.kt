@@ -13,7 +13,6 @@ class LoginUseCase @Inject constructor(
 
     private val ioDispatcher = appDispatchers.io
 
-    // TODO: Add io dispatcher coroutine
     suspend fun execute(user: UserModel) = withContext(ioDispatcher) {
         repository.login(user)
     }

@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiClient(isDebug: Boolean, flavor: Flavor, schedulerType: Scheduler = Schedulers.io()) {
+class ApiClient(isDebug: Boolean, flavor: Flavor) {
 
     private val baseUrl = when (flavor) {
         Flavor.PRO -> URL_PRO
@@ -30,19 +30,17 @@ class ApiClient(isDebug: Boolean, flavor: Flavor, schedulerType: Scheduler = Sch
             .build()
     }
 
-    @Suppress("DEPRECATION")
     val service: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(schedulerType))
             .build()
             .create(ApiService::class.java)
     }
 
     companion object {
-        private const val URL_PRO = "https://reqres.in/api/"
-        private const val URL_PRE = "https://reqres.in/api/"
+        private const val URL_PRO = "https://reqres.in/"
+        private const val URL_PRE = "https://reqres.in/"
     }
 }

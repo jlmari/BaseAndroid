@@ -4,9 +4,24 @@ import com.jlmari.presentation.base.BaseContract
 
 interface LoginContract {
 
-    interface View : BaseContract.View
+    interface View : BaseContract.View {
 
-    interface Router : BaseContract.Router
+        fun setLoginButtonEnabled(isEnabled: Boolean)
 
-    interface Presenter : BaseContract.Presenter<View, Router>
+        fun showError(message: String)
+    }
+
+    interface Router : BaseContract.Router {
+
+        fun navigateToDashboard()
+    }
+
+    interface Presenter : BaseContract.Presenter<View, Router> {
+
+        fun onEmailEdited(email: String)
+
+        fun onPasswordEdited(password: String)
+
+        fun onLoginButtonClicked()
+    }
 }

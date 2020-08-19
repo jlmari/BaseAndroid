@@ -23,15 +23,21 @@
     </fragment>
 
     <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jlmari.baseandroid.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fr_login">
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.jlmari.baseandroid.dashboard.DashboardFragment"
         android:label="DashboardFragment"
         tools:layout="@layout/fr_dashboard" />
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.jlmari.baseandroid.login.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fr_login" />
 
 </navigation>

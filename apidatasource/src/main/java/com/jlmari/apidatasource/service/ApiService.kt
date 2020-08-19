@@ -1,16 +1,18 @@
 package com.jlmari.apidatasource.service
 
-import com.jlmari.domain.models.UserModel
+import com.jlmari.apidatasource.models.LoginResponseModel
+import com.jlmari.apidatasource.models.UserApiModel
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiService {
 
-    @POST("register")
-    suspend fun register(userModel: UserModel): String
+    @POST("api/register")
+    suspend fun register(@Body user: UserApiModel): String
 
-    @POST("login")
-    suspend fun login(userModel: UserModel): String
+    @POST("api/login")
+    suspend fun login(@Body user: UserApiModel): LoginResponseModel
 
-    @POST("logout")
-    suspend fun logout(userModel: UserModel): UserModel
+    @POST("api/logout")
+    suspend fun logout(@Body user: UserApiModel): String
 }

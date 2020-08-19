@@ -11,7 +11,7 @@ import dagger.Component
 
 @PerApplication
 @Component(
-    modules = [AppModule::class, RepositoriesModule::class, DataSourcesModule::class]
+    modules = [AppModule::class, RepositoriesModule::class, DataSourcesModule::class, ApiDataSourceModule::class]
 )
 interface AppComponent {
 
