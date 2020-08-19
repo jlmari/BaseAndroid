@@ -18,9 +18,7 @@ class LoginPresenter @Inject constructor(
     appDispatchers: AppDispatchers,
     private val loginUseCase: LoginUseCase,
     private val registerUseCase: RegisterUseCase
-) :
-    BasePresenter<LoginContract.View, LoginContract.Router>(),
-    LoginContract.Presenter {
+) : BasePresenter<LoginContract.View, LoginContract.Router>(), LoginContract.Presenter {
 
     private val errorHandler: CoroutineExceptionHandler by lazy { CoroutineExceptionHandler { _, e -> e.printStackTrace() } }
     private val scope: CoroutineScope by lazy { CoroutineScope(appDispatchers.main + SupervisorJob() + errorHandler) }
@@ -60,7 +58,7 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { hideProgress() }
-                    viewAction { showError(it.errorMessage ?: it.message ?: "Login error") }
+                    viewAction { showError(it.errorMessage ?: "Login error") }
                 }
             )
         }
@@ -76,7 +74,7 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { hideProgress() }
-                    viewAction { showError(it.errorMessage ?: it.message ?: "Login error") }
+                    viewAction { showError(it.errorMessage ?: "Login error") }
                 }
             )
         }
