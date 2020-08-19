@@ -3,6 +3,7 @@ package com.jlmari.presentation.login
 import com.jlmari.domain.dispatchers.AppDispatchers
 import com.jlmari.domain.models.UserModel
 import com.jlmari.domain.usecases.LoginUseCase
+import com.jlmari.domain.usecases.RegisterUseCase
 import com.jlmari.domain.utils.either
 import com.jlmari.presentation.base.BasePresenter
 import com.jlmari.presentation.utils.isValidEmail
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(
     appDispatchers: AppDispatchers,
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val registerUseCase: RegisterUseCase
 ) :
     BasePresenter<LoginContract.View, LoginContract.Router>(),
     LoginContract.Presenter {
@@ -37,10 +39,14 @@ class LoginPresenter @Inject constructor(
     }
 
     private fun validateInputs() {
-        if (inputEmail.isValidEmail() && inputPassword.isValidPassword()) {
-            viewAction { setLoginButtonEnabled(true) }
-        } else {
-            viewAction { setLoginButtonEnabled(false) }
+        viewAction {
+            if (inputEmail.isValidEmail() && inputPassword.isValidPassword()) {
+                setLoginButtonEnabled(true)
+                setRegisterButtonEnabled(true)
+            } else {
+                setLoginButtonEnabled(false)
+                setRegisterButtonEnabled(false)
+            }
         }
     }
 
@@ -52,6 +58,19 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { showError(it.message ?: "Login error") }
+                }
+            )
+        }
+    }
+
+    override fun onRegisterButtonClicked() {
+        scope.launch {
+            val request = registerUseCase.execute(UserModel(inputEmail, inputPassword))
+            request.either(
+                onSuccess = {
+                    routerAction { navigateToDashboard() }
+                }, onFailure = {
+                    viewAction { showError(it.message ?: "Register error") }
                 }
             )
         }

@@ -2,6 +2,7 @@ package com.jlmari.baseandroid.login
 
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.fragment.findNavController
 import com.jlmari.baseandroid.R
 import com.jlmari.baseandroid.application.di.AppComponent
 import com.jlmari.baseandroid.base.BaseFragment
@@ -22,26 +23,30 @@ class LoginFragment :
 
     override fun setupListeners() {
         super.setupListeners()
-        tietEmail.doOnTextChanged { text, start, before, count ->
+        tietEmail.doOnTextChanged { text, _, _, _ ->
             presenter.onEmailEdited(text?.toString() ?: "")
         }
-        tietPassword.doOnTextChanged { text, start, before, count ->
+        tietPassword.doOnTextChanged { text, _, _, _ ->
             presenter.onPasswordEdited(text?.toString() ?: "")
         }
         btnLogin.setOnClickListener { presenter.onLoginButtonClicked() }
+        btnRegister.setOnClickListener { presenter.onRegisterButtonClicked() }
     }
 
     override fun setLoginButtonEnabled(isEnabled: Boolean) {
         btnLogin.isEnabled = isEnabled
     }
 
+    override fun setRegisterButtonEnabled(isEnabled: Boolean) {
+        btnRegister.isEnabled = isEnabled
+    }
+
     override fun showError(message: String) {
-        context?.let {
-            Toast.makeText(it, message, Toast.LENGTH_LONG).show()
-        }
+        context?.let { Toast.makeText(it, message, Toast.LENGTH_LONG).show() }
     }
 
     override fun navigateToDashboard() {
-
+        val direction = LoginFragmentDirections.actionLoginFragmentToDashboardFragment()
+        findNavController().navigate(direction)
     }
 }

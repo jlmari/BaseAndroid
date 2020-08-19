@@ -18,7 +18,7 @@ class ApiDataSourceImpl @Inject constructor(
     private val apiService: ApiService = apiClient.service
 
     override suspend fun register(user: UserModel): Response<String, ErrorModel> {
-        return safeApiCall { apiService.register(userInMapper.map(user)) }
+        return safeApiCall { apiService.register(userInMapper.map(user)).token }
     }
 
     override suspend fun login(user: UserModel): Response<String, ErrorModel> {

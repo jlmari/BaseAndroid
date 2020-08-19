@@ -8,6 +8,8 @@ interface LoginContract {
 
         fun setLoginButtonEnabled(isEnabled: Boolean)
 
+        fun setRegisterButtonEnabled(isEnabled: Boolean)
+
         fun showError(message: String)
     }
 
@@ -23,5 +25,7 @@ interface LoginContract {
         fun onPasswordEdited(password: String)
 
         fun onLoginButtonClicked()
+
+        fun onRegisterButtonClicked()
     }
 }

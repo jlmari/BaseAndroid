@@ -1,6 +1,7 @@
 package com.jlmari.apidatasource.service
 
 import com.jlmari.apidatasource.models.LoginResponseModel
+import com.jlmari.apidatasource.models.RegisterResponseModel
 import com.jlmari.apidatasource.models.UserApiModel
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -8,7 +9,7 @@ import retrofit2.http.POST
 interface ApiService {
 
     @POST("api/register")
-    suspend fun register(@Body user: UserApiModel): String
+    suspend fun register(@Body user: UserApiModel): RegisterResponseModel
 
     @POST("api/login")
     suspend fun login(@Body user: UserApiModel): LoginResponseModel
