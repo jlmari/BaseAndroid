@@ -60,7 +60,7 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { hideProgress() }
-                    viewAction { showError(it.message ?: "Login error") }
+                    viewAction { showError(it.errorMessage ?: it.message ?: "Login error") }
                 }
             )
         }
@@ -76,7 +76,7 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { hideProgress() }
-                    viewAction { showError(it.message ?: "Register error") }
+                    viewAction { showError(it.errorMessage ?: it.message ?: "Login error") }
                 }
             )
         }
