@@ -52,11 +52,14 @@ class LoginPresenter @Inject constructor(
 
     override fun onLoginButtonClicked() {
         scope.launch {
+            viewAction { showProgress() }
             val request = loginUseCase.execute(UserModel(inputEmail, inputPassword))
             request.either(
                 onSuccess = {
+                    viewAction { hideProgress() }
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
+                    viewAction { hideProgress() }
                     viewAction { showError(it.message ?: "Login error") }
                 }
             )
