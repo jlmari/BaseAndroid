@@ -4,7 +4,10 @@ import com.jlmari.presentation.base.BaseContract
 
 interface DashboardContract {
 
-    interface View : BaseContract.View
+    interface View : BaseContract.View {
+
+        fun showToken(token: String)
+    }
 
     interface Router : BaseContract.Router
 

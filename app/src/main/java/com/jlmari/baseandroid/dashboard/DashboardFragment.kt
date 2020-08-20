@@ -4,6 +4,7 @@ import com.jlmari.baseandroid.R
 import com.jlmari.baseandroid.application.di.AppComponent
 import com.jlmari.baseandroid.base.BaseFragment
 import com.jlmari.presentation.dashboard.DashboardContract
+import kotlinx.android.synthetic.main.fr_dashboard.*
 
 class DashboardFragment :
     BaseFragment<DashboardContract.View, DashboardContract.Router, DashboardContract.Presenter>(),
@@ -15,5 +16,9 @@ class DashboardFragment :
         appComponent?.dashboardComponentBuilder()
             ?.build()
             ?.inject(this)
+    }
+
+    override fun showToken(token: String) {
+        tvToken.append(token)
     }
 }

@@ -6,9 +6,11 @@ import com.jlmari.domain.utils.Response
 
 interface Repository {
 
-    suspend fun register(user: UserModel): Response<String, ErrorModel>
+    suspend fun register(user: UserModel): Response<Unit, ErrorModel>
 
-    suspend fun login(user: UserModel): Response<String, ErrorModel>
+    suspend fun login(user: UserModel): Response<Unit, ErrorModel>
 
     suspend fun logout(user: UserModel): Response<Unit, ErrorModel>
+
+    fun getToken(): String
 }

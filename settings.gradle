@@ -1,2 +1,2 @@
-include ':app', ':presentation', ':domain', ':data', ':apidatasource'
+include ':app', ':presentation', ':domain', ':data', ':apidatasource', ':memorydatasource'
 rootProject.name = "BaseAndroid"
