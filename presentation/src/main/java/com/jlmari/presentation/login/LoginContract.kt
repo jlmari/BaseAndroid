@@ -6,15 +6,13 @@ interface LoginContract {
 
     interface View : BaseContract.View {
 
+        fun showError(message: String?)
+
+        fun showUsersEmailsSpinner(emails: List<String>)
+
         fun setLoginButtonEnabled(isEnabled: Boolean)
 
         fun setRegisterButtonEnabled(isEnabled: Boolean)
-
-        fun showProgress()
-
-        fun hideProgress()
-
-        fun showError(message: String)
     }
 
     interface Router : BaseContract.Router {
@@ -24,7 +22,7 @@ interface LoginContract {
 
     interface Presenter : BaseContract.Presenter<View, Router> {
 
-        fun onEmailEdited(email: String)
+        fun onEmailSelected(emailPosition: Int)
 
         fun onPasswordEdited(password: String)
 

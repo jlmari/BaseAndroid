@@ -154,4 +154,12 @@ abstract class BaseFragment<in V : BaseContract.View, in R : BaseContract.Router
      */
     open fun setupListeners() {
     }
+
+    override fun showProgress() {
+        showProgressDialog()
+    }
+
+    override fun hideProgress() {
+        dismissProgressDialog()
+    }
 }

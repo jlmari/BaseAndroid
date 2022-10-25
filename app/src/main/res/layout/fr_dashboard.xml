@@ -2,17 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_medium"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello Dashboard!" />
+        android:text="@string/dashboard_title" />
 
     <TextView
         android:id="@+id/tvToken"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Session Token: " />
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/session_token" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/logout" />
 
 </LinearLayout>

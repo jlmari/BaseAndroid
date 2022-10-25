@@ -5,7 +5,7 @@ import com.jlmari.domain.repositories.Repository
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LogoutUseCase @Inject constructor(
+class GetAvailableEmailsUseCase @Inject constructor(
     appDispatchers: AppDispatchers,
     private val repository: Repository
 ) {
@@ -13,6 +13,6 @@ class LogoutUseCase @Inject constructor(
     private val ioDispatcher = appDispatchers.io
 
     suspend fun execute() = withContext(ioDispatcher) {
-        repository.logout()
+        repository.getAvailableEmails()
     }
 }

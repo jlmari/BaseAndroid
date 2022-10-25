@@ -1,5 +1,6 @@
 package com.jlmari.baseandroid.dashboard
 
+import androidx.navigation.fragment.findNavController
 import com.jlmari.baseandroid.R
 import com.jlmari.baseandroid.application.di.AppComponent
 import com.jlmari.baseandroid.base.BaseFragment
@@ -18,7 +19,17 @@ class DashboardFragment :
             ?.inject(this)
     }
 
+    override fun setupListeners() {
+        super.setupListeners()
+        btnLogout.setOnClickListener { presenter.onLogoutButtonClicked() }
+    }
+
     override fun showToken(token: String) {
         tvToken.append(token)
+    }
+
+    override fun navigateToLogin() {
+        val direction = DashboardFragmentDirections.actionDashboardFragmentToLoginFragment()
+        findNavController().navigate(direction)
     }
 }

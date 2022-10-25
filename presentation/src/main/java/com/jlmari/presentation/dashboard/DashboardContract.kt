@@ -9,7 +9,13 @@ interface DashboardContract {
         fun showToken(token: String)
     }
 
-    interface Router : BaseContract.Router
+    interface Router : BaseContract.Router {
 
-    interface Presenter : BaseContract.Presenter<View, Router>
+        fun navigateToLogin()
+    }
+
+    interface Presenter : BaseContract.Presenter<View, Router> {
+
+        fun onLogoutButtonClicked()
+    }
 }

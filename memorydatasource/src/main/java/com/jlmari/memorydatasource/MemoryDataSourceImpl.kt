@@ -7,7 +7,13 @@ import com.jlmari.memorydatasource.base.SharedPreferencesDataSource
 import javax.inject.Inject
 
 class MemoryDataSourceImpl @Inject constructor(context: Context) :
-    SharedPreferencesDataSource(context), MemoryDataSource {
+        SharedPreferencesDataSource(context), MemoryDataSource {
+
+    override var email: String
+        get() = get(@Key TOKEN, "")
+        set(value) {
+            put(@Key TOKEN, value)
+        }
 
     override var token: String
         get() = get(@Key TOKEN, "")
@@ -21,12 +27,14 @@ class MemoryDataSourceImpl @Inject constructor(context: Context) :
     @Target(AnnotationTarget.EXPRESSION)
     @Retention(AnnotationRetention.SOURCE)
     @StringDef(
+        EMAIL,
         TOKEN
     )
     annotation class Key
 
     companion object {
         /** Shared preferences keys */
+        private const val EMAIL = "EMAIL"
         private const val TOKEN = "TOKEN"
     }
 }

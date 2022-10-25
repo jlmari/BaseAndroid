@@ -2,6 +2,7 @@ package com.jlmari.presentation.login
 
 import com.jlmari.domain.dispatchers.AppDispatchers
 import com.jlmari.domain.models.UserModel
+import com.jlmari.domain.usecases.GetAvailableEmailsUseCase
 import com.jlmari.domain.usecases.LoginUseCase
 import com.jlmari.domain.usecases.RegisterUseCase
 import com.jlmari.domain.utils.either
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(
     appDispatchers: AppDispatchers,
+    private val getAvailableEmailsUseCase: GetAvailableEmailsUseCase,
     private val loginUseCase: LoginUseCase,
     private val registerUseCase: RegisterUseCase
 ) : BasePresenter<LoginContract.View, LoginContract.Router>(), LoginContract.Presenter {
@@ -25,9 +27,28 @@ class LoginPresenter @Inject constructor(
 
     private var inputEmail: String = ""
     private var inputPassword: String = ""
+    private var availableEmails = emptyList<String>()
 
-    override fun onEmailEdited(email: String) {
-        inputEmail = email
+    override fun onCreate() {
+        super.onCreate()
+        scope.launch {
+            viewAction { showProgress() }
+            val request = getAvailableEmailsUseCase.execute()
+            request.either(
+                onSuccess = {
+                    availableEmails = it
+                    viewAction { hideProgress() }
+                    viewAction { showUsersEmailsSpinner(availableEmails) }
+                }, onFailure = {
+                    viewAction { hideProgress() }
+                    viewAction { showError(it.errorMessage) }
+                }
+            )
+        }
+    }
+
+    override fun onEmailSelected(emailPosition: Int) {
+        inputEmail = availableEmails[emailPosition]
         validateInputs()
     }
 
@@ -58,7 +79,7 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { hideProgress() }
-                    viewAction { showError(it.errorMessage ?: "Login error") }
+                    viewAction { showError(it.errorMessage) }
                 }
             )
         }
@@ -74,7 +95,7 @@ class LoginPresenter @Inject constructor(
                     routerAction { navigateToDashboard() }
                 }, onFailure = {
                     viewAction { hideProgress() }
-                    viewAction { showError(it.errorMessage ?: "Login error") }
+                    viewAction { showError(it.errorMessage) }
                 }
             )
         }

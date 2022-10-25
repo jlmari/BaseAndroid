@@ -188,4 +188,12 @@ abstract class BaseActivity<in V : BaseContract.View, in R : BaseContract.Router
         // Return default behaviour
         return super.dispatchTouchEvent(event)
     }
+
+    override fun showProgress() {
+        showProgressDialog()
+    }
+
+    override fun hideProgress() {
+        dismissProgressDialog()
+    }
 }

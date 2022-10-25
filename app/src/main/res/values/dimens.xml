@@ -1,3 +1,4 @@
 <resources>
+    <dimen name="margin_small">8sp</dimen>
     <dimen name="margin_medium">16dp</dimen>
 </resources>

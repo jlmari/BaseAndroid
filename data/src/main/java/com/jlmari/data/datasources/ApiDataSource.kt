@@ -6,6 +6,8 @@ import com.jlmari.domain.utils.Response
 
 interface ApiDataSource {
 
+    suspend fun getAvailableEmails(): Response<List<String>, ErrorModel>
+
     suspend fun register(user: UserModel): Response<String, ErrorModel>
 
     suspend fun login(user: UserModel): Response<String, ErrorModel>

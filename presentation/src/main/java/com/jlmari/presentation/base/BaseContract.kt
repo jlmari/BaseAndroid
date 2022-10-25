@@ -8,7 +8,12 @@ interface BaseContract {
     /**
      * MVP View that defines from what Presenter events we care about.
      */
-    interface View
+    interface View {
+
+        fun showProgress()
+
+        fun hideProgress()
+    }
 
     /**
      * MVP Router base interface that defines all those methods that every router must implement.

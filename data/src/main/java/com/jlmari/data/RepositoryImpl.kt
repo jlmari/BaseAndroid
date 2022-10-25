@@ -14,23 +14,33 @@ class RepositoryImpl @Inject constructor(
     private val memoryDataSource: MemoryDataSource
 ) : Repository {
 
-    override suspend fun register(user: UserModel): Response<Unit, ErrorModel> {
-        return apiDataSource.register(user).map {
+    override suspend fun getAvailableEmails(): Response<List<String>, ErrorModel> =
+        apiDataSource.getAvailableEmails()
+
+    override suspend fun register(user: UserModel): Response<Unit, ErrorModel> =
+        apiDataSource.register(user).map {
+            storeUserData(user.email, it)
             memoryDataSource.token = it
         }
-    }
 
-    override suspend fun login(user: UserModel): Response<Unit, ErrorModel> {
-        return apiDataSource.login(user).map {
+    override suspend fun login(user: UserModel): Response<Unit, ErrorModel> =
+        apiDataSource.login(user).map {
+            storeUserData(user.email, it)
             memoryDataSource.token = it
         }
-    }
 
-    override suspend fun logout(user: UserModel): Response<Unit, ErrorModel> {
-        return apiDataSource.logout(user)
-    }
+    override suspend fun logout(): Response<Unit, ErrorModel> =
+        apiDataSource.logout(UserModel(memoryDataSource.email, memoryDataSource.token)).map {
+            memoryDataSource.token = ""
+        }
 
-    override fun getToken(): String {
-        return memoryDataSource.token
+    override fun getToken(): String =
+        memoryDataSource.token
+
+    private fun storeUserData(email: String, token: String) {
+        with(memoryDataSource) {
+            this.email = email
+            this.token = token
+        }
     }
 }
